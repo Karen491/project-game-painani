@@ -7,7 +7,7 @@ let rewards = [];
 
 let sprites = {
   running: {
-    src: "images/painani-runner-duplicate.png",
+    src: "./images/painani-runner-duplicate.png",
     width: 250,
     height: 500
   }
@@ -60,7 +60,7 @@ class Background {
     this.width = canvas.width;
     this.height = canvas.height;
     this.image = new Image();
-    this.image.src = "images/Painani path extendido.jpg";
+    this.image.src = "./images/Painani path extendido.jpg";
   }
 
   draw() {
@@ -84,7 +84,7 @@ class Warrior {
     this.width = 80;
     this.height = 80;
     this.image = new Image();
-    this.image.src = "images/aztec-warrior.png";
+    this.image.src = "./images/aztec-warrior.png";
   }
 
   draw() {
@@ -100,7 +100,7 @@ class Reward {
     this.width = 30;
     this.height = 30;
     this.image = new Image();
-    this.image.src = "images/drop-it-clipart-4-removebg-preview.png";
+    this.image.src = "./images/drop-it-clipart-4-removebg-preview.png";
   }
 
   draw() {
