@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+    background-image: url(/images/game-background.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    font-family: 'Bellota Text', cursive;
+    font-size: 30px;
+    color: rgb(31, 31, 43);
+    padding-right: 100px;
+    margin: 20px;
+}
+
+#painani {
+    width: 160px;
+    height: 190px;
+}
+
+
+.score {
+    background-color: rgb(41, 112, 136);
+    width: 200px;
+    height: 150px;
+    border-radius: 8px;
+    font-size: 30px;
+    color: white;
+    font-family: 'Bellota Text', cursive;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    line-height: 0;
+    margin-left: 20px;
+}
+
+#game-board {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#start-button {
+    margin-right: 20px;
+}
+
+#canvas {
+    background-color: lightblue;
+}
+
