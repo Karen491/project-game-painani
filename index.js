@@ -28,10 +28,12 @@ class Painani {
   }
 
   collision(item) {
-    return (this.x < item.x + item.width) &&
-      (this.x + this.width > item.x) &&
-      (this.y < item.y + item.height) &&
-      (this.y + this.height > item.y);
+    return (
+      this.x < item.x + item.width &&
+      this.x + this.width > item.x &&
+      this.y < item.y + item.height &&
+      this.y + this.height > item.y
+    );
   }
 
   draw() {
@@ -65,7 +67,13 @@ class Background {
     this.y++;
     if (this.y > canvas.height) this.y = 0;
     ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-    ctx.drawImage(this.image, this.x, this.y - canvas.height, this.width, this.height);
+    ctx.drawImage(
+      this.image,
+      this.x,
+      this.y - canvas.height,
+      this.width,
+      this.height
+    );
   }
 }
 
@@ -99,7 +107,6 @@ class Reward {
     if (frames % 5) this.y += 0.5;
     ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
-
 }
 
 const background = new Background();
@@ -109,7 +116,7 @@ const reward = new Reward();
 
 function generateWarrios() {
   if (frames % 100 == 0) {
-    const x = Math.floor(Math.random() * 400 + 250)
+    const x = Math.floor(Math.random() * 400 + 250);
     const warrior = new Warrior(x);
     warrios = [...warrios, warrior];
   }
@@ -118,18 +125,18 @@ function generateWarrios() {
 function drawingWarriors() {
   warrios.forEach((warrior, index) => {
     if (warrior.y > 900) {
-      return warrios.splice(index, 1)
+      return warrios.splice(index, 1);
     }
     warrior.draw();
     if (painani.collision(warrior)) {
       requestId = undefined;
     }
-  })
+  });
 }
 
 function generateRewards() {
   if (frames % 200 == 0) {
-    const x = Math.floor(Math.random() * 400 + 250)
+    const x = Math.floor(Math.random() * 400 + 250);
     const reward = new Reward(x);
     rewards = [...rewards, reward];
   }
@@ -138,13 +145,13 @@ function generateRewards() {
 function drawingRewards() {
   rewards.forEach((reward, index) => {
     if (reward.y > 900) {
-      return rewards.splice(index, 1)
+      return rewards.splice(index, 1);
     }
     reward.draw();
     // if (painani.collision(warrior)) {
     //   requestId = undefined;
     // }
-  })
+  });
 }
 
 function gameOver() {
@@ -169,14 +176,14 @@ function update() {
 }
 
 window.onload = () => {
-    document.getElementById('start-button').onclick = () => {
-      startGame();
-    };
-
-    function startGame() {
-      requestId = requestAnimationFrame(update);
-    }
+  document.getElementById("start-button").onclick = () => {
+    startGame();
   };
+
+  function startGame() {
+    requestId = requestAnimationFrame(update);
+  }
+};
 
 addEventListener("keydown", e => {
   if (e.keyCode === 39) {
@@ -190,7 +197,3 @@ addEventListener("keydown", e => {
     }
   }
 });
-
-
-
-
