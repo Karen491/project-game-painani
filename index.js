@@ -60,7 +60,7 @@ class Background {
     this.width = canvas.width;
     this.height = canvas.height;
     this.image = new Image();
-    this.image.src = "./images/Painani path extendido.jpg";
+    this.image.src = "images/Painani path extendido.jpg";
   }
 
   draw() {
