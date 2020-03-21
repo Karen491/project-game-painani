@@ -1,19 +1,19 @@
 body {
     margin: 0;
-    background-image: url(images/game-background.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    font-family: 'Bellota Text', cursive;
 }
 
-.title {
+nav {
     display: flex;
     justify-content: center;
-    font-family: 'Bellota Text', cursive;
+    margin: 10px 50px;
+}
+
+.game-title {
+    display: flex;
+    align-items: center;
     font-size: 50px;
     color: rgb(31, 31, 43);
-    padding-right: 100px;
-    margin: 20px;
 }
 
 #painani {
@@ -21,44 +21,70 @@ body {
     height: 210px;
 }
 
+#ironhack-logo {
+    width: 200px;
+    height: 210px;
+}
 
-.score {
-    background-color: rgb(37, 87, 104);
-    width: 300px;
-    height: 150px;
-    border-radius: 50px;
-    font-size: 30px;
-    color: rgb(232, 248, 4);
-    font-family: 'Bellota Text', cursive;
+.instructions-section {
+    display: flex;
+    justify-content: space-between;
+}
+
+#teotihuacan {
+    width: 1200px;
+    height: 800px;
+}
+
+.instructions {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 30px;
-    padding-left: 40px;
-    line-height: 0;
+    align-items: center;
+    width: 1000px;
+    background-color: rgb(37, 87, 104);
+    margin-right: 150px;
+    color: white;
+    border-radius: 50px;
+}
+
+.instructions h3, .credentials h3 {
+    font-size: 60px;
+    text-align: center;
     letter-spacing: 3px;
-    margin-left: 20px;
 }
 
-#game-board {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-}
-
-#start-button {
-    margin-right: 20px;
+.instructions p {
+    font-size: 30px;
+    text-align: center;
+    letter-spacing: 2px;
+    padding: 0 10px;
 }
 
 #start-button {
-    padding: 1%;
+    margin-top: 20px;
     width: 300px;
-    border: solid 4px rgb(37, 87, 104);
     border-radius: 50px;
     font-family: 'Bellota Text', cursive;
-    font-size: 45px;
+    font-size: 40px;
     font-weight: 600;
-    color: rgb(37, 87, 104);;
-    background-color: rgb(232, 248, 4);
+    color: rgb(9, 38, 48);
+    background-color: white;
+}
+
+#start-button a {
+    text-decoration: none;
+}
+
+.credentials {
+    display: flex;
+    justify-content: space-around;
+    line-height: 10px;
+    margin-top: 20px;
+}
+
+.credentials p {
+    font-size: 30px;
+    text-align: center;
+    letter-spacing: 2px;
 }
 

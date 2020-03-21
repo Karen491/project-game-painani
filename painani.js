@@ -154,6 +154,7 @@ function drawingRewards() {
     reward.draw();
     if (painani.collision(reward)) {
       points += 10;
+      ctx.fillStyle = "red";
       ctx.font = "50px Avenir";
       ctx.fillText("+ 10", reward.x + 65, reward.y + 5);
       rewards.splice(index, 1);
