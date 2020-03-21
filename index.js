@@ -2,8 +2,12 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 let frames = 0;
 let requestId;
-let warrios = [];
+let obstacles = [];
 let rewards = [];
+let points = 0;
+let winningScore = 270;
+
+var kilometers = document.getElementById("kilometers");
 
 let sprites = {
   running: {
@@ -77,18 +81,18 @@ class Background {
   }
 }
 
-class Warrior {
+class Obstacle {
   constructor(x) {
     this.x = x;
     this.y = 0;
-    this.width = 80;
-    this.height = 80;
+    this.width = 140;
+    this.height = 120;
     this.image = new Image();
-    this.image.src = "./images/aztec-warrior.png";
+    this.image.src = "./images/painani-obstacle-removebg-preview.png";
   }
 
   draw() {
-    if (frames % 5) this.y += 6;
+    if (frames % 10) this.y += 6;
     ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
 }
@@ -97,46 +101,46 @@ class Reward {
   constructor(x) {
     this.x = x;
     this.y = 0;
-    this.width = 30;
-    this.height = 30;
+    this.width = 60;
+    this.height = 40;
     this.image = new Image();
-    this.image.src = "./images/drop-it-clipart-4-removebg-preview.png";
+    this.image.src = "./images/fish-removebg-preview.png";
   }
 
   draw() {
-    if (frames % 5) this.y += 0.5;
+    if (frames % 10) this.y += 5;
     ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
 }
 
 const background = new Background();
-const warrior = new Warrior();
-const painani = new Painani(300, 720, 120, 170);
+const obstacle = new Obstacle();
+const painani = new Painani(450, 720, 120, 170);
 const reward = new Reward();
 
-function generateWarrios() {
+function generateObstacles() {
   if (frames % 100 == 0) {
-    const x = Math.floor(Math.random() * 400 + 250);
-    const warrior = new Warrior(x);
-    warrios = [...warrios, warrior];
+    const x = Math.floor(Math.random() * 500 + 200);
+    const obstacle = new Obstacle(x);
+    obstacles = [...obstacles, obstacle];
   }
 }
 
-function drawingWarriors() {
-  warrios.forEach((warrior, index) => {
-    if (warrior.y > 900) {
-      return warrios.splice(index, 1);
+function drawingObstacles() {
+  obstacles.forEach((obstacle, index) => {
+    if (obstacle.y > 900) {
+      return obstacles.splice(index, 1);
     }
-    warrior.draw();
-    if (painani.collision(warrior)) {
+    obstacle.draw();
+    if (painani.collision(obstacle)) {
       requestId = undefined;
     }
   });
 }
 
 function generateRewards() {
-  if (frames % 200 == 0) {
-    const x = Math.floor(Math.random() * 400 + 250);
+  if (frames % 50 == 0) {
+    const x = Math.floor(Math.random() * 500 + 200);
     const reward = new Reward(x);
     rewards = [...rewards, reward];
   }
@@ -148,17 +152,47 @@ function drawingRewards() {
       return rewards.splice(index, 1);
     }
     reward.draw();
-    // if (painani.collision(warrior)) {
-    //   requestId = undefined;
-    // }
+    if (painani.collision(reward)) {
+      points += 10;
+      ctx.font = "50px Avenir";
+      ctx.fillText("+ 10", reward.x + 65, reward.y + 5);
+      rewards.splice(index, 1);
+      kilometers.textContent = points;
+    }
   });
 }
 
 function gameOver() {
   requestId = undefined;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.font = "80px Avenir";
-  ctx.fillText("Game Over", 250, 500);
+  ctx.fillStyle = "red";
+  ctx.font = "80px 'Bellota Text', cursive";
+  ctx.fillText("You failed!!", 300, 200);
+  const image = new Image();
+  image.src = "./images/loss-image-removebg-preview.png";
+  image.addEventListener(
+    "load",
+    () => {
+      ctx.drawImage(image, 80, 220, 800, 400);
+    },
+    false
+  );
+}
+
+function winGame() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "red";
+  ctx.font = "80px 'Bellota Text', cursive";
+  ctx.fillText("Mission accomplished!!", 100, 200);
+  const image = new Image();
+  image.src = "./images/win-image-removebg-preview.png";
+  image.addEventListener(
+    "load",
+    () => {
+      ctx.drawImage(image, 80, 220, 800, 400);
+    },
+    false
+  );
 }
 
 function update() {
@@ -166,10 +200,15 @@ function update() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   background.draw();
   painani.draw();
-  generateWarrios();
-  drawingWarriors();
-  // drawingDrops();
-  if (!requestId) gameOver();
+  generateObstacles();
+  drawingObstacles();
+  generateRewards();
+  drawingRewards();
+  if (points === winningScore) {
+    winGame();
+    requestId = undefined;
+  }
+  if (!requestId && points < winningScore) gameOver();
   if (requestId) {
     requestId = requestAnimationFrame(update);
   }
@@ -187,7 +226,7 @@ window.onload = () => {
 
 addEventListener("keydown", e => {
   if (e.keyCode === 39) {
-    if (painani.x <= 550) {
+    if (painani.x <= 699) {
       painani.x += 50;
     }
   }
